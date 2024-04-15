@@ -5,8 +5,8 @@ plugins {
 }
 
 java {
-    sourceCompatibility = JavaVersion.VERSION_11
-    targetCompatibility = JavaVersion.VERSION_11
+    sourceCompatibility = JavaVersion.VERSION_17
+    targetCompatibility = JavaVersion.VERSION_17
 }
 
 gradleEnterprise {
@@ -295,7 +295,7 @@ tasks.register('parallelTest', Test) {
     maxParallelForks = Math.max(16, Runtime.runtime.availableProcessors())
     enableAssertions = true
     maxHeapSize = "1024m"
-    jvmArgs = ['--add-exports', 'java.base/jdk.internal.misc=ALL-UNNAMED', '--add-opens', 'java.base/jdk.internal.misc=ALL-UNNAMED', '--add-opens', 'java.base/java.lang=ALL-UNNAMED', '--add-opens', 'java.base/java.util=ALL-UNNAMED']
+    jvmArgs = ['--add-exports', 'java.base/jdk.internal.access=ALL-UNNAMED', '--add-opens', 'java.base/jdk.internal.access=ALL-UNNAMED', '--add-exports', 'java.base/jdk.internal.misc=ALL-UNNAMED', '--add-opens', 'java.base/jdk.internal.misc=ALL-UNNAMED', '--add-opens', 'java.base/java.lang=ALL-UNNAMED', '--add-opens', 'java.base/java.util=ALL-UNNAMED']
 
     testLogging {
         events "passed", "skipped", "failed"
@@ -332,7 +332,7 @@ tasks.register('singleThreadTest', Test) {
     maxParallelForks = 1
     enableAssertions = true
     maxHeapSize = "1024m"
-    jvmArgs = ['--add-exports', 'java.base/jdk.internal.misc=ALL-UNNAMED', '--add-opens', 'java.base/jdk.internal.misc=ALL-UNNAMED', '--add-opens', 'java.base/java.lang=ALL-UNNAMED', '--add-opens', 'java.base/java.util=ALL-UNNAMED'] // Explicitly set jvmArgs
+    jvmArgs = ['--add-exports', 'java.base/jdk.internal.access=ALL-UNNAMED', '--add-opens', 'java.base/jdk.internal.access=ALL-UNNAMED', '--add-exports', 'java.base/jdk.internal.misc=ALL-UNNAMED', '--add-opens', 'java.base/jdk.internal.misc=ALL-UNNAMED', '--add-opens', 'java.base/java.lang=ALL-UNNAMED', '--add-opens', 'java.base/java.util=ALL-UNNAMED'] // Explicitly set jvmArgs
 
     testLogging {
         events "passed", "skipped", "failed"
