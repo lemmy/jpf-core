@@ -264,6 +264,10 @@ public class ByteBuffer extends Buffer {
     return this;
   }
   public int arrayOffset(){
+    if (array == null)
+      throw new UnsupportedOperationException();
+    if (isReadOnly())
+      throw new ReadOnlyBufferException();
     return offset;
   }
 
@@ -328,6 +332,11 @@ public class ByteBuffer extends Buffer {
   Object base() {
     return array;
   }
+  @Override
+  public boolean isReadOnly(){
+    return false;
+  }
+
   @Override
   public final ByteBuffer flip() {
     super.flip();
