@@ -27,11 +27,9 @@ import java.util.ArrayList;
 import java.util.Enumeration;
 import java.util.List;
 
+import gov.nasa.jpf.test.SingleThreadTest;
 import org.junit.Test;
 import org.junit.experimental.categories.Category;
-
-import gov.nasa.jpf.test.SingleThreadTest;
-
 
 /**
  * @author Nastaran Shafiei <nastaran.shafiei@gmail.com>
