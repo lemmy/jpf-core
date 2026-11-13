@@ -10,6 +10,7 @@ public class FindVarHandleTest extends TestJPF {
     static class TestClass {
         public int instanceField;
         public static int staticField;
+        public Object referenceField;
     }
 
 
@@ -67,6 +68,19 @@ public class FindVarHandleTest extends TestJPF {
         if (verifyUnhandledException("java.lang.NoSuchFieldException")){
             VarHandle handle = MethodHandles.lookup().findStaticVarHandle(TestClass.class, "notExistingField", int.class);
             assertNotNull(handle);
+        }
+    }
+
+    @Test
+    public void testSetRelease() throws NoSuchFieldException, IllegalAccessException {
+        if (verifyNoPropertyViolation()) {
+            VarHandle handle = MethodHandles.lookup().findVarHandle(TestClass.class, "referenceField", Object.class);
+            TestClass owner = new TestClass();
+            Object replacement = new Object();
+
+            handle.setRelease(owner, replacement);
+
+            assertSame(replacement, owner.referenceField);
         }
     }
 }

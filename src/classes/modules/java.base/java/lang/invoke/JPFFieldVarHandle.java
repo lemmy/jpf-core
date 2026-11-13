@@ -52,8 +52,10 @@ public class JPFFieldVarHandle {
     //This is implemented in the corresponding peer
   }
 
-  public void set(Object called, Object value) {
-    //This is implemented in the corresponding peer
+  public native void set(Object called, Object value);
+
+  void setRelease(Object called, Object value) {
+    set(called, value); // This will not generate additional memory access reorderings as allowed by the JMM
   }
 
   boolean weakCompareAndSetRelease(Object aqs, int expect, int update){
