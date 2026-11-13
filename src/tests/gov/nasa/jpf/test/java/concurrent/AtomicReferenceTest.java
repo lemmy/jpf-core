@@ -50,4 +50,17 @@ public class AtomicReferenceTest extends TestJPF {
       assertEquals(ref.get(), "final value");
     }
   }
+
+  @Test
+  public void testWeakCompareAndSetVolatile() {
+    if (verifyNoPropertyViolation()) {
+      AtomicReference<String> ref = new AtomicReference<String>();
+
+      assertTrue(ref.weakCompareAndSetVolatile(null, "value"));
+      assertEquals("value", ref.get());
+
+      assertFalse(ref.weakCompareAndSetVolatile("other", "nope"));
+      assertEquals("value", ref.get());
+    }
+  }
 }

@@ -28,7 +28,14 @@ public class JPF_java_util_concurrent_atomic_AtomicReference extends NativePeer 
 
   @MJI
   public void $clinit____V (MJIEnv env, int rcls) {
-    // don't let this one pass, it calls native methods from non-public Sun classes
+    // The JDK initializer calls Reflection.getCallerClass. Install the same
+    // field handle findVarHandle would return for the value field.
+    ClassInfo ci = env.getReferredClassInfo(rcls);
+    FieldInfo valueField = ci.getInstanceField("value");
+    int handle = env.newObject("java.base$&$java.lang.invoke.JPFFieldVarHandle");
+    env.setIntField(handle, "fieldRef", valueField.getFieldIndex());
+    env.setIntField(handle, "classRef", rcls);
+    env.setStaticReferenceField(rcls, "VALUE", handle);
   }
 
   @MJI

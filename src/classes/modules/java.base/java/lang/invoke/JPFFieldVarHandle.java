@@ -44,10 +44,7 @@ public class JPFFieldVarHandle {
 
   public native boolean compareAndSet(Object owner, long expect, long update);
 
-  public boolean compareAndSet(Object aqs, Object expect, Object update) {
-    //This is implemented in the corresponding peer
-    return false;
-  }
+  public native boolean compareAndSet(Object aqs, Object expect, Object update);
 
   public native int get(Object owner);
 
@@ -68,6 +65,10 @@ public class JPFFieldVarHandle {
   }
 
   boolean weakCompareAndSetRelease(Object aqs, Object expect, Object update){
+    return compareAndSet(aqs, expect, update); // This will not generate additional memory access reorderings as allowed by the JMM
+  }
+
+  boolean weakCompareAndSet(Object aqs, Object expect, Object update){
     return compareAndSet(aqs, expect, update); // This will not generate additional memory access reorderings as allowed by the JMM
   }
 }
