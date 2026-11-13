@@ -476,7 +476,10 @@ public class ClassLoaderInfo
    * and contains a method that captures the behavior of the lambda expression.
    */
   public ClassInfo getResolvedFuncObjType (int bsIdx, ClassInfo fiClassInfo, String samUniqueName, BootstrapMethodInfo bmi, String[] freeVariableTypeNames) {
-    String typeName = bmi.enclosingClass.getName() + "$" + bsIdx;
+    // Javac names anonymous classes Enclosing$1, Enclosing$2, ... Using the
+    // bootstrap index in that sequence reuses the loaded class and then
+    // writes captured values into the wrong field layout.
+    String typeName = bmi.enclosingClass.getName() + "$$Lambda$" + bsIdx;
     
     ClassInfo funcObjType = resolvedClasses.get( typeName);
 

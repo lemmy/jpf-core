@@ -26,6 +26,7 @@ import java.util.List;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.function.BiFunction;
+import java.util.function.LongSupplier;
 import java.util.function.Supplier;
 import java.util.stream.Collectors;
 
@@ -324,6 +325,34 @@ public class LambdaTest extends TestJPF{
       Runnable r2 = (B::new);
       
       assertFalse(r1.getClass().getName().equals(r2.getClass().getName()));
+    }
+  }
+
+  static class LambdaHost {
+    private final Runnable anonymous = new Runnable() {
+      @Override
+      public void run() {}
+    };
+
+    private long one() {
+      return 1L;
+    }
+
+    void check() {
+      anonymous.run();
+      Runnable first = () -> {};
+      first.run();
+      long captured = 41L;
+      LongSupplier second = () -> captured + one();
+      assertEquals(42L, second.getAsLong());
+      assertFalse(second.getClass().getName().equals(anonymous.getClass().getName()));
+    }
+  }
+
+  @Test
+  public void testLambdaNameDoesNotCollideWithAnonymousClass() {
+    if (verifyNoPropertyViolation()) {
+      new LambdaHost().check();
     }
   }
   
