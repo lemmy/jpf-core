@@ -62,6 +62,16 @@ public class AtomicLong {
     return value;
   }
 
+  public native long getAndAdd (long delta);
+
+  public long addAndGet (long delta) {
+    return getAndAdd(delta) + delta;
+  }
+
+  public long incrementAndGet () {
+    return addAndGet(1);
+  }
+
   @SuppressWarnings("unused")
   private static boolean VMSupportsCS8 () {
     // whatever it means
