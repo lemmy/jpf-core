@@ -70,7 +70,6 @@ public class AssertTest extends LoadUtility {
     }
   }
 
-  @Category(SingleThreadTest.class)
   @Test
   @Category(SingleThreadTest.class)
   public void testSetClassAssertionStatus2() throws MalformedURLException, ClassNotFoundException, SecurityException, NoSuchMethodException, IllegalAccessException {
@@ -101,7 +100,6 @@ public class AssertTest extends LoadUtility {
     movePkgBack();
   }
 
-  @Category(SingleThreadTest.class)
   @Test
   @Category(SingleThreadTest.class)
   public void testSetPackageAssertionStatus() throws MalformedURLException, ClassNotFoundException, SecurityException, NoSuchMethodException, IllegalAccessException {
@@ -129,7 +127,6 @@ public class AssertTest extends LoadUtility {
     movePkgBack();
   }
 
-  @Category(SingleThreadTest.class)
   @Test
   @Category(SingleThreadTest.class)
   public void testSetDefaultAssertionStatus() throws MalformedURLException, ClassNotFoundException, SecurityException, NoSuchMethodException, IllegalAccessException {
@@ -159,7 +156,6 @@ public class AssertTest extends LoadUtility {
     movePkgBack();
   }
   
-  @Category(SingleThreadTest.class)
   @Test
   @Category(SingleThreadTest.class)
   public void testClearAssertionStatus() throws MalformedURLException, ClassNotFoundException, SecurityException, NoSuchMethodException, IllegalAccessException, InvocationTargetException {

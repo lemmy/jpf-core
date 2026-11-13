@@ -88,9 +88,6 @@ public class CharBuffer extends Buffer {
     charBuffer.flip();
     return charBuffer;
   }
-  public int arrayOffset(){
-    return offset;
-  }
 
   @Override
   public char[] array() {
